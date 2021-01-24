@@ -4,16 +4,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WaterPoloStat.API.Dtos
+namespace WaterPoloStat.API.Dtos.Account
 {
-    public class LoginDto
+    public class RegistrazioneDto
     {
+        [Required]
+        public string Nome { get; set; }
+        [Required]
+        public string Cognome { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-
-        [Required]        
+        [Required]
         public string Password { get; set; }
-
     }
 }

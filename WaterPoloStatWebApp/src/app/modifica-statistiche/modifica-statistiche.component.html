@@ -1,1 +1,111 @@
-<p>modifica-statistiche works!</p>
+<div class="row">
+    <div class="col-md-4 order-md-2 order-lg-2">
+        <app-cronometro></app-cronometro>
+        <mat-divider class="mb-3"></mat-divider>
+        <h4>Aggiungi evento</h4>
+        <div class="row">
+            <div class="col-6 mb-2">
+                <button mat-flat-button color="primary" class="w-100" (click)="addGoal()">Goal</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button mat-flat-button color="primary" class="w-100">Tiro</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button mat-flat-button color="primary" class="w-100">Espulsione</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button mat-flat-button color="primary" class="w-100">Palla Persa</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button mat-flat-button color="primary" class="w-100">Palla Rubata</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button mat-flat-button color="primary" class="w-100">Timeout</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button mat-flat-button color="primary" class="w-100">Sprint Winner</button>
+            </div>
+            <div class="col-md-12 my-4">
+                <button mat-flat-button color="accent" class="w-100">Cancella ultimo evento</button>
+            </div>
+            <div class="col-md-12">
+                <button mat-flat-button color="warn" class="w-100">Termina partita</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 order-md-1 order-lg-1">
+        <div class="row my-2">
+            <div class="col-md-5">
+                <h1>Home Team</h1>
+            </div>
+            <div class="col-md-2 text-center">
+                <h1>2 - 2</h1>
+            </div>
+            <div class="col-md-5 text-right">
+                <h1>Away Team</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row d-md-none">
+                    <div class="col-8">
+                        <h1>Home Team</h1>
+                    </div>
+                    <div class="col-4 text-right">
+                        <h1>2</h1>
+                    </div>
+                </div>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Giocatore</th>
+                            <th scope="col">G</th>
+                            <th scope="col">E</th>
+                            <th scope="col">T</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of elenco">
+                            <td scope="col">{{item}}</td>
+                            <td scope="col">Nome Cognome</td>
+                            <td scope="col">2</td>
+                            <td scope="col">2</td>
+                            <td scope="col">2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <div class="row d-md-none">
+                    <div class="col-8">
+                        <h1>Away Team</h1>
+                    </div>
+                    <div class="col-4 text-right">
+                        <h1>2</h1>
+                    </div>
+                </div>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Giocatore</th>
+                            <th scope="col">G</th>
+                            <th scope="col">E</th>
+                            <th scope="col">T</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of elenco">
+                            <td scope="col">{{item}}</td>
+                            <td scope="col">Nome Cognome</td>
+                            <td scope="col">2</td>
+                            <td scope="col">2</td>
+                            <td scope="col">2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

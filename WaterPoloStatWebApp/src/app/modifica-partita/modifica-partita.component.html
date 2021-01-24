@@ -1,0 +1,61 @@
+<div class="container">
+    <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="infoFormGroup">
+            <ng-template matStepLabel>Info</ng-template>
+            <form [formGroup]="infoFormGroup">
+                <div class="row">
+                    <mat-form-field class="col-md-6" appearance="fill">
+                        <mat-label>Seleziona una data</mat-label>
+                        <input matInput formControlName="data" [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error>
+                            {{validationMessages.getErrorMessage(data)}}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-md-6">
+                        <mat-label>Campionato</mat-label>
+                        <input matInput formControlName="campionato" />
+                        <mat-error>
+                            {{validationMessages.getErrorMessage(campionato)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="col-md-6">
+                        <mat-label>Categoria</mat-label>
+                        <input matInput formControlName="categoria" />
+                        <mat-error>
+                            {{validationMessages.getErrorMessage(categoria)}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6">
+                        <mat-label>Luogo</mat-label>
+                        <input matInput formControlName="luogo" />
+                        <mat-error>
+                            {{validationMessages.getErrorMessage(luogo)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <button mat-flat-button color="primary" class="float-right" matStepperNext>Avanti</button>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Squadra di casa</ng-template>
+            <form [formGroup]="squadraCasaFormGroup">
+                <app-edit-player [rosterFormGroup]="squadraCasaFormGroup"></app-edit-player>
+                <button mat-flat-button matStepperPrevious>Indietro</button>
+                <button mat-flat-button color="primary" class="float-right" matStepperNext>Avanti</button>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Squadra ospiti</ng-template>
+            <p>You are now done.</p>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

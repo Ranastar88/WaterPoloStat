@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace WaterPoloStat.Domain
 {
-    public class Lineup
+    [Table("Lineups", Schema = "wps")]
+    public class Lineup : BaseInfo
     {
         public int Id { get; set; }
         public int Numero { get; set; }

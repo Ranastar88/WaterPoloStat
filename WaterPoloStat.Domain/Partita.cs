@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using WaterPoloStat.Domain.Enum;
 
 namespace WaterPoloStat.Domain
 {
-    public class Partita
+    [Table("Partite", Schema = "wps")]
+    public class Partita : BaseInfo
     {
         public int Id { get; set; }
-        [Required]
-        public string AspUserId { get; set; }
         public string Luogo { get; set; }
         public string Campionato { get; set; }
         public string Citta { get; set; }

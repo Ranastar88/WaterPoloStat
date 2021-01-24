@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace WaterPoloStat.Domain
 {
-    public class Squadra
+    [Table("Squadre", Schema = "wps")]
+    public class Squadra : BaseInfo
     {
         public int Id { get; set; }
         public string Nome { get; set; }

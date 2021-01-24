@@ -1,0 +1,9 @@
+<div class="row">
+    <mat-form-field class="col-md-6">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" />
+        <mat-error>
+            {{validationMessages.getErrorMessage(nome)}}
+        </mat-error>
+    </mat-form-field>
+</div>
