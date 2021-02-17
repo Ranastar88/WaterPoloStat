@@ -1,9 +1,90 @@
-<div class="row">
-    <mat-form-field class="col-md-6">
-        <mat-label>Nome</mat-label>
-        <input matInput formControlName="nome" />
-        <mat-error>
-            {{validationMessages.getErrorMessage(nome)}}
-        </mat-error>
-    </mat-form-field>
+<div [formGroup]="rosterFormGroup">
+    <div class="row">
+        <mat-form-field class="col-md-6">
+            <mat-label>Nome</mat-label>            
+            <input type="text"
+            placeholder="Nome"
+            aria-label="Nome"
+            matInput formControlName="nome"
+            [matAutocomplete]="nomeSquadra">
+     <mat-autocomplete #nomeSquadra="matAutocomplete">
+       <mat-option *ngFor="let option of options" [value]="option">
+         {{option}}
+       </mat-option>
+     </mat-autocomplete>
+            <mat-error>
+                {{validationMessages.getErrorMessage(nome)}}
+            </mat-error>
+        </mat-form-field>
+        <div class="col-md-6 text-right">
+            <button mat-flat-button color="primary" (click)="addPlayer()" aria-label="Aggiungi giocatore">
+                <mat-icon>add</mat-icon> Aggiungi giocatore
+            </button>
+        </div>
+    </div>
+    <div formArrayName="giocatori">
+        <div *ngFor="let player of roster.controls; index as i">
+            <div formGroupName="{{i}}" class="row">
+                <mat-form-field class="col-md-2">
+                    <mat-label>Numero</mat-label>
+                    <mat-select matInput formControlName="numero">
+                        <mat-option *ngFor="let item of [].constructor(14); let i = index" value="i+1">{{i+1}}</mat-option>
+                    </mat-select>               
+                    <mat-error>
+                        {{validationMessages.getErrorMessage(player.get('numero'))}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-3">
+                    <mat-label>Nome</mat-label>
+                    <input type="text"
+                           placeholder="Nome"
+                           aria-label="Nome"
+                           matInput formControlName="nome"
+                           [matAutocomplete]="player">
+                    <mat-autocomplete #player="matAutocomplete">
+                      <mat-option *ngFor="let player of elencoGiocatori" [value]="player.id">
+                        {{player.nome}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error>
+                        {{validationMessages.getErrorMessage(player.get('nome'))}}
+                    </mat-error>
+                  </mat-form-field>
+                <mat-form-field class="col-md-3">
+                    <mat-label>Data di nascita</mat-label>
+                    <input matInput formControlName="data" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error>
+                        {{validationMessages.getErrorMessage(player.get('data'))}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-3">
+                    <mat-label>Ruolo</mat-label>
+                    <mat-select matInput formControlName="ruolo">
+                        <mat-option [value]="'Portiere'">
+                            Portiere
+                        </mat-option>
+                        <mat-option [value]="'Difensore'">
+                            Difensore
+                        </mat-option>
+                        <mat-option [value]="'Attaccante'">
+                            Attaccante
+                        </mat-option>
+                        <mat-option [value]="'Centroboa'">
+                            Centroboa
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>
+                        {{validationMessages.getErrorMessage(player.get('ruolo'))}}
+                    </mat-error>
+                </mat-form-field>
+                <div class="col-md-1">
+                    <button mat-icon-button color="warn" (click)="removePlayer(i)" aria-label="Rimuovi giocatore">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

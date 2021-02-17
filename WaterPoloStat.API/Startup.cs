@@ -39,10 +39,9 @@ namespace WaterPoloStat.API
             services.AddControllers();
 
             services.AddDbContext<WaterPoloStatDomain>(opt => opt.UseSqlServer(Configuration.GetConnectionString("WaterPoloStatContext")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<AspNetUser, IdentityRole>()
                 .AddEntityFrameworkStores<WaterPoloStatDomain>()
                 .AddDefaultTokenProviders();
-
             // Add Jwt Authentication
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // remove default claims
             services

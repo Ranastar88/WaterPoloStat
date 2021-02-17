@@ -21,12 +21,13 @@ import { ModificaPartitaComponent } from './modifica-partita/modifica-partita.co
 import { RegistrazioneComponent } from './registrazione/registrazione.component';
 import { LoginComponent } from './login/login.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EditPlayerComponent } from './shared/component/edit-player/edit-player.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -54,11 +55,13 @@ import { EditPlayerComponent } from './shared/component/edit-player/edit-player.
     MatSelectModule,
     MatStepperModule,
     MatDialogModule,
-    ReactiveFormsModule,    
+    ReactiveFormsModule,
     FormsModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule 
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    HttpClientModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

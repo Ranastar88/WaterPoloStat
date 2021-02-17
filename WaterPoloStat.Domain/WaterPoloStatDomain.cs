@@ -25,7 +25,8 @@ namespace WaterPoloStat.Domain
             _userId = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(x => x.Type == "nameid")?.Value;
 
         }
-
+        
+        public DbSet<AspNetUser> AspNetUsers { get; set; }
         public DbSet<Partita> Partite { get; set; }
         public DbSet<Ruolo> Ruoli { get; set; }
         public DbSet<Giocatore> Giocatori { get; set; }

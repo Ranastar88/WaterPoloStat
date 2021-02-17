@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NuovaRegistrazione } from '../shared/models/nuovaRegistrazione';
+import { AccountService } from '../shared/services/account.service';
 import { ValidationMessagesService } from '../shared/services/validationMessages.service';
 import { ValidatorsService } from '../shared/services/validators.service';
 
@@ -10,18 +12,25 @@ import { ValidatorsService } from '../shared/services/validators.service';
 export class RegistrazioneComponent implements OnInit {
   public registrazioneFormGroup = this.formBuilder.group({    
     nome: ['', [Validators.required]],
+    cognome: ['', [Validators.required]],
     email: ['', [Validators.required,Validators.email]],
     password: ['', [Validators.required]],
     confermaPassword: ['', [Validators.required]],
     consensoDati: [false,[Validators.requiredTrue]]
   });
+  myStyle: object = {};
+    myParams: object = {};
+    width: number = 100;
+    height: number = 100;
 
 
   constructor(private formBuilder: FormBuilder,
     private customValidators: ValidatorsService,
-    public validationMessages: ValidationMessagesService) { }
+    public validationMessages: ValidationMessagesService,
+    public accountService: AccountService) { }
     
   get nome() { return this.registrazioneFormGroup.get('nome'); }
+  get cognome() { return this.registrazioneFormGroup.get('cognome'); }
   get email() { return this.registrazioneFormGroup.get('email'); }
   get password() { return this.registrazioneFormGroup.get('password'); }
   get confermaPassword() { return this.registrazioneFormGroup.get('confermaPassword'); }
@@ -30,8 +39,35 @@ export class RegistrazioneComponent implements OnInit {
   ngOnInit(): void {
     this.registrazioneFormGroup.get('confermaPassword').setValidators([Validators.required, Validators.maxLength(255), this.customValidators.compare2Field(this.password)]);
 
+    this.myStyle = {
+      'position': 'fixed',
+      'width': '100%',
+      'height': '100%',
+      'z-index': -1,
+      'top': 0,
+      'left': 0,
+      'right': 0,
+      'bottom': 0,
+  };
+
+this.myParams = {
+      particles: {
+          number: {
+              value: 200,
+          },
+          color: {
+              value: '#ff0000'
+          },
+          shape: {
+              type: 'triangle',
+          },
+  }
+};
   }
   onSubmit():void{
     this.registrazioneFormGroup.markAllAsTouched();
+    let nuovoutente:NuovaRegistrazione = { ...NuovaRegistrazione, ...this.registrazioneFormGroup.getRawValue() };
+    console.log(nuovoutente);
+    this.accountService.registraUtente(nuovoutente).subscribe();
   }
 }

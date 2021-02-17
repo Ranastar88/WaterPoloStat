@@ -21,8 +21,7 @@ using WaterPoloStat.Domain;
 namespace WaterPoloStat.API.Controllers
 {
     [Route("api/account")]
-    [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController : Controller
     {
         private readonly SignInManager<AspNetUser> _signInManager;
         private readonly UserManager<AspNetUser> _userManager;
@@ -33,15 +32,24 @@ namespace WaterPoloStat.API.Controllers
             IConfiguration configuration,
             IUserClaimsPrincipalFactory<AspNetUser> claimsPrincipalFactory)
         {
-
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _configuration = configuration;
+            _claimsPrincipalFactory = claimsPrincipalFactory;
         }
+
         [AllowAnonymous]
-        [HttpPost("registrazione")]
+        [HttpPost("test")]
+        public IActionResult Test([FromBody]string test) { return Ok(test); }
+
+        [AllowAnonymous]
+        [HttpPost("registrazione")]        
         public async Task<ActionResult> Registrazione([FromBody] RegistrazioneDto model, CancellationToken cancellationToken = default)
         {
             if (!ModelState.IsValid) return BadRequest("Dati inviati non validi.");
 
-            var result = await _userManager.CreateAsync(new AspNetUser() { 
+            var result = await _userManager.CreateAsync(new AspNetUser()
+            {
                 Nome = model.Nome,
                 Cognome = model.Cognome,
                 Email = model.Email,
@@ -54,7 +62,7 @@ namespace WaterPoloStat.API.Controllers
         }
 
 
-            [AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginDto model, CancellationToken cancellationToken = default)
         {
@@ -62,7 +70,7 @@ namespace WaterPoloStat.API.Controllers
 
             if (result.Succeeded)
             {
-                var user = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);                
+                var user = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
                 return Ok(await GenerateJwtToken(model.Email, user, Request.Headers["Origin"]));
             }
             return BadRequest();

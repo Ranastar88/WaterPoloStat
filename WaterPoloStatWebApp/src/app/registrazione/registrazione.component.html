@@ -11,6 +11,13 @@
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="w-100 mb-2">
+                    <mat-label>Cognome</mat-label>
+                    <input matInput  formControlName="cognome" />
+                    <mat-error>
+                      {{validationMessages.getErrorMessage(cognome)}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100 mb-2">
                     <mat-label>Email</mat-label>
                     <input matInput  formControlName="email" />
                     <mat-error>

@@ -30,22 +30,14 @@ export class ModificaPartitaComponent implements OnInit {
     this.squadraCasaFormGroup = this.formBuilder.group({
       nome: ['sda', [Validators.required]],
       squadraId: [null],
-      giocatori: this.formBuilder.array([...this.createPlayer()])
-    });
-  }
-
-  private createPlayer(): FormGroup[] {
-    const arr = [];
-    for (let i = 1; i < 15; i++) {
-      arr.push(this.formBuilder.group({
+      giocatori: this.formBuilder.array([this.formBuilder.group({
         nome: ['', [Validators.required]],
         data: ['', [Validators.required]],
         ruolo: ['', [Validators.required]],
-        numero: [i, [Validators.required]],
+        numero: [null, [Validators.required]],
         giocatoreId: [null]
-      }));
-    }
-    return arr;
+      })])
+    });
   }
 
 }
