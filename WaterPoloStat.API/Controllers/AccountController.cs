@@ -54,7 +54,8 @@ namespace WaterPoloStat.API.Controllers
                 Cognome = model.Cognome,
                 Email = model.Email,
                 UserName = model.Email,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                LicenzaId = Guid.NewGuid().ToString()
             }, model.Password);
             if (result.Succeeded) return Ok();
 
@@ -73,7 +74,9 @@ namespace WaterPoloStat.API.Controllers
                 var user = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
                 return Ok(await GenerateJwtToken(model.Email, user, Request.Headers["Origin"]));
             }
-            return BadRequest();
+            var errorResult = new ResultDto();
+            errorResult.AddError("Credenziali Errate");
+            return BadRequest(errorResult);
         }
 
         private async Task<AppUserAuth> GenerateJwtToken(string email, AspNetUser user, string audience)
@@ -117,6 +120,10 @@ namespace WaterPoloStat.API.Controllers
             {
                 BearerToken = tokenString,
                 IsAuthenticated = true,
+                Id = user.Id,
+                Username = user.UserName,
+                FirstName = user.Nome,
+                LastName = user.Cognome
             };
         }
     }

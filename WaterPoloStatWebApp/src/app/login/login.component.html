@@ -1,0 +1,26 @@
+<div fxLayout="column" fxLayoutAlign="space-evenly center">
+    <div class="centralContainer">
+        <h1 class="text-center">Login</h1>
+        <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+            <mat-form-field class="w-100">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" />
+                <mat-error>
+                    {{validationMessages.getErrorMessage(email)}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" />
+                <mat-error>
+                    {{validationMessages.getErrorMessage(password)}}
+                </mat-error>
+            </mat-form-field>
+            <div *ngIf="error" class="panel error mb-1">
+                <p>{{error}}</p>
+            </div>            
+            <p><a href="">Clicca qui</a> per se hai dimenticato la password</p>
+            <button mat-flat-button color="primary" class="w-100">Login</button>
+        </form>
+    </div>
+</div>

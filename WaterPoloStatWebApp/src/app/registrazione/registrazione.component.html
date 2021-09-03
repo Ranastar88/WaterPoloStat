@@ -1,0 +1,55 @@
+<div fxLayout="column" fxLayoutAlign="space-evenly center">
+    <div class="centralContainer">        
+        <h1 class="text-center">Registrazione</h1>
+        <form [formGroup]="registrazioneFormGroup" *ngIf="!registrazioneOk" (ngSubmit)="onSubmit()">
+            <mat-form-field class="w-100">
+                <mat-label>Nome</mat-label>
+                <input matInput  formControlName="nome" />
+                <mat-error>
+                  {{validationMessages.getErrorMessage(nome)}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Cognome</mat-label>
+                <input matInput  formControlName="cognome" />
+                <mat-error>
+                  {{validationMessages.getErrorMessage(cognome)}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Email</mat-label>
+                <input matInput  formControlName="email" />
+                <mat-error>
+                  {{validationMessages.getErrorMessage(email)}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" />
+                <mat-error>
+                  {{validationMessages.getErrorMessage(password)}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Conferma Password</mat-label>
+                <input matInput type="password" formControlName="confermaPassword" />
+                <mat-error>
+                  {{validationMessages.getErrorMessage(confermaPassword,'Password')}}
+                </mat-error>
+            </mat-form-field>
+            <div class="w-100 mb-2">
+              <mat-checkbox formControlName="consensoDati">Trattamento dati</mat-checkbox>
+                <mat-error>
+                  {{validationMessages.getErrorMessage(consensoDati)}}
+                </mat-error>
+            </div>
+            <div *ngIf="error" class="panel error mb-1">
+                <p>{{error}}</p>
+            </div>            
+            <button mat-flat-button color="primary" class="w-100">Registrati</button>
+        </form>
+        <div class="panel success" *ngIf="registrazioneOk">
+          <p>La registrazione è stata effettuata correttamente!<br>
+          <a href="/login">Clicca qui</a> per effetuare il login.</p>
+        </div>
+    </div></div>

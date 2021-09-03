@@ -11,13 +11,13 @@ namespace WaterPoloStat.Domain
         public int Id { get; set; }
         public string Nome { get; set; }
         public virtual ICollection<Lineup> Lineups { get; set; }
-        public virtual ICollection<Partita> PartitaCasa { get; set; }
-        public virtual ICollection<Partita> PartitaOspiti { get; set; }
+        public virtual ICollection<Partita> PartiteCasa { get; set; }
+        public virtual ICollection<Partita> PartiteOspiti { get; set; }
         public Squadra()
         {
             Lineups = new List<Lineup>();
-            PartitaCasa = new List<Partita>();
-            PartitaOspiti = new List<Partita>();
+            PartiteCasa = new List<Partita>();
+            PartiteOspiti = new List<Partita>();
         }
     }
 }

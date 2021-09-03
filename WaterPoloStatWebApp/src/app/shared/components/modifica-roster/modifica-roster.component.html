@@ -1,0 +1,78 @@
+<div [formGroup]="rosterFormGroup">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-form-field fxFlex="48%">
+            <mat-label>Nome</mat-label>            
+            <input type="text"
+            placeholder="Nome"
+            aria-label="Nome"
+            matInput formControlName="nome">
+            <mat-error>
+                {{validationMessages.getErrorMessage(nome)}}
+            </mat-error>
+        </mat-form-field>
+        <div>
+            <button mat-flat-button color="primary" (click)="addPlayer()" aria-label="Aggiungi giocatore">
+                <mat-icon>add</mat-icon> Aggiungi giocatore
+            </button>
+        </div>
+    </div>
+    <ng-container formArrayName="giocatori">
+        <div *ngFor="let player of roster.controls; index as i">
+            <div formGroupName="{{i}}" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="12px">
+                <mat-form-field fxFlex="10%">
+                    <mat-label>Numero</mat-label>
+                    <mat-select matInput formControlName="numero">
+                        <mat-option *ngFor="let item of [].constructor(14); let i = index" [value]="i+1">{{i+1}}</mat-option>
+                    </mat-select>               
+                    <mat-error>
+                        {{validationMessages.getErrorMessage(player.get('numero'))}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex="40%">
+                    <mat-label>Nome</mat-label>
+                    <input type="text"
+                           placeholder="Nome"
+                           aria-label="Nome"
+                           matInput formControlName="nome">                    
+                    <mat-error>
+                        {{validationMessages.getErrorMessage(player.get('nome'))}}
+                    </mat-error>
+                  </mat-form-field>
+                <mat-form-field fxFlex="20%">
+                    <mat-label>Data di nascita</mat-label>
+                    <input matInput formControlName="data" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error>
+                        {{validationMessages.getErrorMessage(player.get('data'))}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex="20%">
+                    <mat-label>Ruolo</mat-label>
+                    <mat-select matInput formControlName="ruoloId">
+                        <mat-option [value]="1">
+                            Portiere
+                        </mat-option>
+                        <mat-option [value]="2">
+                            Difensore
+                        </mat-option>
+                        <mat-option [value]="3">
+                            Attaccante
+                        </mat-option>
+                        <mat-option [value]="4">
+                            Centroboa
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>
+                        {{validationMessages.getErrorMessage(player.get('ruoloId'))}}
+                    </mat-error>
+                </mat-form-field>
+                <div>
+                    <button mat-icon-button color="warn" (click)="removePlayer(i)" aria-label="Rimuovi giocatore">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

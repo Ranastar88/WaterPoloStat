@@ -1,0 +1,70 @@
+<div class="container mt-2">
+    <h1>Nuova Partita</h1>
+    <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="infoFormGroup">
+            <ng-template matStepLabel>Info</ng-template>
+            <form [formGroup]="infoFormGroup">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <mat-form-field fxFlex="48%" appearance="fill">
+                        <mat-label>Seleziona una data</mat-label>
+                        <input matInput formControlName="data" [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error>
+                            {{validationMessages.getErrorMessage(data)}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%">
+                        <mat-label>Campionato</mat-label>
+                        <input matInput formControlName="campionato" />
+                        <mat-error>
+                            {{validationMessages.getErrorMessage(campionato)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <mat-form-field fxFlex="48%">
+                        <mat-label>Città</mat-label>
+                        <input matInput formControlName="citta" />
+                        <mat-error>
+                            {{validationMessages.getErrorMessage(citta)}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%">
+                        <mat-label>Luogo</mat-label>
+                        <input matInput formControlName="luogo" />
+                        <mat-error>
+                            {{validationMessages.getErrorMessage(luogo)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="mt-2" fxLayout="row" fxLayoutAlign="end center">
+                    <button mat-flat-button color="primary" matStepperNext>Avanti</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="squadraCasaFormGroup">
+            <ng-template matStepLabel>Squadra di casa</ng-template>
+            <form [formGroup]="squadraCasaFormGroup">
+                <app-modifica-roster [rosterFormGroup]="squadraCasaFormGroup"></app-modifica-roster>
+                <div class="mt-2" fxLayout="row" fxLayoutAlign="space-between center">
+                    <button mat-flat-button matStepperPrevious>Indietro</button>
+                    <button mat-flat-button color="primary" matStepperNext>Avanti</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Squadra ospiti</ng-template>
+            <form [formGroup]="squadraCasaFormGroup">
+                <app-modifica-roster [rosterFormGroup]="squadraOspitiFormGroup"></app-modifica-roster>
+                <div *ngIf="error" class="panel error mb-1">
+                    <p>{{error}}</p>
+                </div>         
+                <div class="mt-2" fxLayout="row" fxLayoutAlign="space-between center">
+                    <button mat-flat-button matStepperPrevious>Indietro</button>
+                    <button mat-flat-button color="primary" (click)="onSubmit()">Salva</button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

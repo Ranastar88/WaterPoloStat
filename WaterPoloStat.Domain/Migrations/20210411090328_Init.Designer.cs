@@ -10,14 +10,15 @@ using WaterPoloStat.Domain;
 namespace WaterPoloStat.Domain.Migrations
 {
     [DbContext(typeof(WaterPoloStatDomain))]
-    [Migration("20191123180648_CreateDB")]
-    partial class CreateDB
+    [Migration("20210411090328_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0")
+                .HasDefaultSchema("imp")
+                .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -70,71 +71,6 @@ namespace WaterPoloStat.Domain.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -217,6 +153,84 @@ namespace WaterPoloStat.Domain.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("WaterPoloStat.Domain.AspNetUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cognome")
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LicenzaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("WaterPoloStat.Domain.Evento", b =>
                 {
                     b.Property<int>("Id")
@@ -224,11 +238,34 @@ namespace WaterPoloStat.Domain.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Cancellato")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CancellatoDa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatoDa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DataCancellazione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCreazione")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DataInserimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataUltimaModifica")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("EsitoTiro")
                         .HasColumnType("int");
+
+                    b.Property<string>("LicenzaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Lineup1Id")
                         .HasColumnType("int");
@@ -241,6 +278,9 @@ namespace WaterPoloStat.Domain.Migrations
 
                     b.Property<int>("Minuti")
                         .HasColumnType("int");
+
+                    b.Property<string>("ModificatoDa")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
@@ -279,7 +319,7 @@ namespace WaterPoloStat.Domain.Migrations
 
                     b.HasIndex("PartitaId");
 
-                    b.ToTable("Eventi");
+                    b.ToTable("Eventi","wps");
                 });
 
             modelBuilder.Entity("WaterPoloStat.Domain.Giocatore", b =>
@@ -289,22 +329,45 @@ namespace WaterPoloStat.Domain.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Cognome")
+                    b.Property<bool>("Cancellato")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CancellatoDa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatoDa")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DataCancellazione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCreazione")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DataDiNascita")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DataUltimaModifica")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LicenzaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModificatoDa")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nazionalita")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Nominativo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Giocatori");
+                    b.ToTable("Giocatori","wps");
                 });
 
             modelBuilder.Entity("WaterPoloStat.Domain.Lineup", b =>
@@ -314,13 +377,39 @@ namespace WaterPoloStat.Domain.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Cancellato")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CancellatoDa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatoDa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DataCancellazione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCreazione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataUltimaModifica")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("GiocatoreId")
                         .HasColumnType("int");
+
+                    b.Property<string>("LicenzaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModificatoDa")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PartitaId")
+                    b.Property<int>("PartitaId")
                         .HasColumnType("int");
 
                     b.Property<int>("RuoloId")
@@ -339,7 +428,7 @@ namespace WaterPoloStat.Domain.Migrations
 
                     b.HasIndex("SquadraId");
 
-                    b.ToTable("Lineups");
+                    b.ToTable("Lineups","wps");
                 });
 
             modelBuilder.Entity("WaterPoloStat.Domain.Partita", b =>
@@ -349,11 +438,13 @@ namespace WaterPoloStat.Domain.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AspUserId")
-                        .IsRequired()
+                    b.Property<string>("Campionato")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Campionato")
+                    b.Property<bool>("Cancellato")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CancellatoDa")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Citta")
@@ -362,7 +453,20 @@ namespace WaterPoloStat.Domain.Migrations
                     b.Property<bool>("CondividiLive")
                         .HasColumnType("bit");
 
+                    b.Property<string>("CreatoDa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataCancellazione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCreazione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataUltimaModifica")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("GoalCasa")
@@ -371,14 +475,12 @@ namespace WaterPoloStat.Domain.Migrations
                     b.Property<int>("GoalOspiti")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdSquadraCasa")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdSquadraOspiti")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Iniziata")
                         .HasColumnType("bit");
+
+                    b.Property<string>("LicenzaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Luogo")
                         .HasColumnType("nvarchar(max)");
@@ -386,16 +488,19 @@ namespace WaterPoloStat.Domain.Migrations
                     b.Property<int>("Minuti")
                         .HasColumnType("int");
 
+                    b.Property<string>("ModificatoDa")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Orario")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Secondi")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SquadraId")
+                    b.Property<int>("SquadraCasaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SquadraId1")
+                    b.Property<int>("SquadraOspitiId")
                         .HasColumnType("int");
 
                     b.Property<int>("Tempo")
@@ -406,11 +511,11 @@ namespace WaterPoloStat.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SquadraId");
+                    b.HasIndex("SquadraCasaId");
 
-                    b.HasIndex("SquadraId1");
+                    b.HasIndex("SquadraOspitiId");
 
-                    b.ToTable("Partite");
+                    b.ToTable("Partite","wps");
                 });
 
             modelBuilder.Entity("WaterPoloStat.Domain.Ruolo", b =>
@@ -422,11 +527,12 @@ namespace WaterPoloStat.Domain.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ruoli");
+                    b.ToTable("Ruoli","lkp");
                 });
 
             modelBuilder.Entity("WaterPoloStat.Domain.Squadra", b =>
@@ -436,12 +542,38 @@ namespace WaterPoloStat.Domain.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Cancellato")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CancellatoDa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatoDa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DataCancellazione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCreazione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataUltimaModifica")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LicenzaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModificatoDa")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Squadre");
+                    b.ToTable("Squadre","wps");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -455,7 +587,7 @@ namespace WaterPoloStat.Domain.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WaterPoloStat.Domain.AspNetUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -464,7 +596,7 @@ namespace WaterPoloStat.Domain.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WaterPoloStat.Domain.AspNetUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -479,7 +611,7 @@ namespace WaterPoloStat.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WaterPoloStat.Domain.AspNetUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -488,7 +620,7 @@ namespace WaterPoloStat.Domain.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WaterPoloStat.Domain.AspNetUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -514,7 +646,7 @@ namespace WaterPoloStat.Domain.Migrations
                     b.HasOne("WaterPoloStat.Domain.Partita", "Partita")
                         .WithMany("Eventi")
                         .HasForeignKey("PartitaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -526,12 +658,14 @@ namespace WaterPoloStat.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WaterPoloStat.Domain.Partita", null)
+                    b.HasOne("WaterPoloStat.Domain.Partita", "Partita")
                         .WithMany("Lineups")
-                        .HasForeignKey("PartitaId");
+                        .HasForeignKey("PartitaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WaterPoloStat.Domain.Ruolo", "Ruolo")
-                        .WithMany("Lineups")
+                        .WithMany()
                         .HasForeignKey("RuoloId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -545,13 +679,17 @@ namespace WaterPoloStat.Domain.Migrations
 
             modelBuilder.Entity("WaterPoloStat.Domain.Partita", b =>
                 {
-                    b.HasOne("WaterPoloStat.Domain.Squadra", null)
-                        .WithMany("PartitaCasa")
-                        .HasForeignKey("SquadraId");
+                    b.HasOne("WaterPoloStat.Domain.Squadra", "SquadraCasa")
+                        .WithMany("PartiteCasa")
+                        .HasForeignKey("SquadraCasaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("WaterPoloStat.Domain.Squadra", null)
-                        .WithMany("PartitaOspiti")
-                        .HasForeignKey("SquadraId1");
+                    b.HasOne("WaterPoloStat.Domain.Squadra", "SquadraOspiti")
+                        .WithMany("PartiteOspiti")
+                        .HasForeignKey("SquadraOspitiId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

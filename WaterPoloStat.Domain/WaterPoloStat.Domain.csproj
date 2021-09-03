@@ -9,6 +9,16 @@
     <Compile Remove="Migrations\20191123155320_CreateDatabase.Designer.cs" />
     <Compile Remove="Migrations\20191123175432_CreateDB.cs" />
     <Compile Remove="Migrations\20191123175432_CreateDB.Designer.cs" />
+    <Compile Remove="Migrations\20191123180648_CreateDB.cs" />
+    <Compile Remove="Migrations\20191123180648_CreateDB.Designer.cs" />
+    <Compile Remove="Migrations\20210321155411_Init.cs" />
+    <Compile Remove="Migrations\20210321155411_Init.Designer.cs" />
+    <Compile Remove="Migrations\20210409203206_nominativoGiocatori.cs" />
+    <Compile Remove="Migrations\20210409203206_nominativoGiocatori.Designer.cs" />
+    <Compile Remove="Migrations\20210409210956_paritaidLineup.cs" />
+    <Compile Remove="Migrations\20210409210956_paritaidLineup.Designer.cs" />
+    <Compile Remove="Migrations\20210411084818_Init.cs" />
+    <Compile Remove="Migrations\20210411084818_Init.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

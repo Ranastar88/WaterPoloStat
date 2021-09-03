@@ -17,8 +17,11 @@ namespace WaterPoloStat.Domain
         public int GiocatoreId { get; set; }
         [Required] 
         public int RuoloId { get; set; }
+        [Required]
+        public int PartitaId { get; set; }
         public virtual Squadra Squadra { get; set; }
         public virtual Giocatore Giocatore { get; set; }
         public virtual Ruolo Ruolo { get; set; }
+        public virtual Partita Partita { get; set; }
     }
 }

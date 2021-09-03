@@ -1,0 +1,52 @@
+<div class="container">
+    <div>
+        <h2>Partite</h2>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-card fxFlex="30%">
+                <mat-card-header>
+                    <mat-card-title>Nuova Partita</mat-card-title>
+                    <mat-card-subtitle>Crea una nuova partita</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="text-right">
+                    <button mat-mini-fab color="primary" aria-label="Nuova partita" (click)="nuovaPartita()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </mat-card-content>
+            </mat-card>
+            <mat-card fxFlex="30%">
+                <mat-card-header>
+                    <mat-card-title>Elenco partite</mat-card-title>
+                    <mat-card-subtitle>Visualizza l'elenco delle partite gestite</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="text-right">
+                    <button mat-mini-fab color="primary" aria-label="Elenco partite" (click)="elencoPartite()">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </mat-card-content>
+            </mat-card>
+            <mat-card fxFlex="30%">
+                <mat-card-header>
+                    <mat-card-title>Riprendi ultima partita</mat-card-title>
+                    <mat-card-subtitle>Modifica e aggiorna le statistiche dell'ultima partita inserita</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="text-right">
+                    <button mat-mini-fab color="primary" aria-label="Ultima partita">
+                        <mat-icon>insights</mat-icon>
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div>
+        <h2>Statistiche</h2>
+        <div>
+            Statistiche partite
+        </div>
+        <div>
+            Statistiche squadre
+        </div>
+        <div>
+            Statistiche giocatori
+        </div>
+    </div>
+</div>

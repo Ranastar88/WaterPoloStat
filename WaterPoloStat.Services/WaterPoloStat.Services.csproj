@@ -9,4 +9,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WaterPoloStat.Domain\WaterPoloStat.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

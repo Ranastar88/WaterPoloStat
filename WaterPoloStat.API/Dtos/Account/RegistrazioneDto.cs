@@ -17,5 +17,7 @@ namespace WaterPoloStat.API.Dtos.Account
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
+        public string ConfermaPassword { get; set; }
+        public bool ConsensoDati { get; set; }
     }
 }

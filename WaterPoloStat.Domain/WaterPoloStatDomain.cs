@@ -25,7 +25,7 @@ namespace WaterPoloStat.Domain
             _userId = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(x => x.Type == "nameid")?.Value;
 
         }
-        
+
         public DbSet<AspNetUser> AspNetUsers { get; set; }
         public DbSet<Partita> Partite { get; set; }
         public DbSet<Ruolo> Ruoli { get; set; }
@@ -44,6 +44,22 @@ namespace WaterPoloStat.Domain
             modelBuilder.Entity<Lineup>().HasQueryFilter(x => !x.Cancellato && x.LicenzaId == _licenzaId);
             modelBuilder.Entity<Giocatore>().HasQueryFilter(x => !x.Cancellato && x.LicenzaId == _licenzaId);
             modelBuilder.Entity<Evento>().HasQueryFilter(x => !x.Cancellato && x.LicenzaId == _licenzaId);
+
+            modelBuilder.Entity<Evento>()
+                .HasOne(e => e.Partita)
+                .WithMany(x => x.Eventi)
+                .HasForeignKey(x => x.PartitaId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Partita>()
+                .HasOne(e => e.SquadraCasa)
+                .WithMany(x => x.PartiteCasa)
+                .HasForeignKey(x => x.SquadraCasaId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Partita>()
+                .HasOne(e => e.SquadraOspiti)
+                .WithMany(x => x.PartiteOspiti)
+                .HasForeignKey(x => x.SquadraOspitiId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -55,7 +71,7 @@ namespace WaterPoloStat.Domain
                 e =>
                     e.State == EntityState.Added && e.Metadata.GetProperties().Any(p => p.Name == "LicenzaId") && e.Metadata.GetProperties().Any(p => p.Name == "CreatoDa")))
             {
-                item.CurrentValues["Id"] = Guid.NewGuid();
+                //item.CurrentValues["Id"] = Guid.NewGuid();
 
                 if (_licenzaId == null) return Task.FromException<int>(new Exception("Errore: licenza id obbligatorio"));
                 item.CurrentValues["LicenzaId"] = _licenzaId;

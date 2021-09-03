@@ -17,9 +17,9 @@ namespace WaterPoloStat.Domain
         public DateTime? Data { get; set; }
         public string Orario { get; set; }
         [Required]
-        public int IdSquadraCasa { get; set; }
+        public int SquadraCasaId { get; set; }
         [Required]
-        public int IdSquadraOspiti { get; set; }
+        public int SquadraOspitiId { get; set; }
         public int GoalCasa { get; set; }
         public int GoalOspiti { get; set; }
         public bool Iniziata { get; set; }
@@ -30,6 +30,9 @@ namespace WaterPoloStat.Domain
         public TempoDiGioco Tempo { get; set; }
         public virtual ICollection<Evento> Eventi { get; set; }
         public virtual ICollection<Lineup> Lineups { get; set; }
+        public virtual Squadra SquadraCasa { get; set; }
+        public virtual Squadra SquadraOspiti { get; set; }
+
         public Partita()
         {
             Eventi = new List<Evento>();

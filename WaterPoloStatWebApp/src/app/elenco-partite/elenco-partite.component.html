@@ -1,0 +1,29 @@
+<div class="container mt-2"> 
+    <div fxLayout="row" fxLayoutAlign="space-between center" >
+        <h1>Elenco Partite</h1>
+      <button mat-flat-button color="primary">Nuova partita</button>
+      </div>
+      <mat-form-field class="example-form-field">
+          <mat-label>Ricerca</mat-label>
+          <input matInput type="text" [(ngModel)]="ricerca">
+          <button mat-button *ngIf="ricerca" matSuffix mat-icon-button aria-label="Clear" (click)="ricerca=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+    <mat-list role="list">
+        <mat-list-item *ngFor="let partita of ElencoPartite">
+            <mat-icon mat-list-icon>
+                sports_volleyball
+                </mat-icon>
+            <div mat-line>{{partita.squadraCasa}} - {{partita.squadraOspiti}}</div>
+            <div mat-line>{{partita.data}} - {{partita.campionato}}</div>
+            <button mat-icon-button color="accent" (click)="goToPage('/modificapartita/' + partita.id)" aria-label="Modifica">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" aria-label="Statistiche">
+                <mat-icon>insights</mat-icon>
+              </button>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+    </mat-list>
+</div>

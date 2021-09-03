@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using WaterPoloStat.Services.Interfaces;
 using WaterPoloStat.Services;
+using AutoMapper;
 
 namespace WaterPoloStat.API
 {
@@ -67,7 +68,7 @@ namespace WaterPoloStat.API
                         ValidateIssuer = true,
                         ValidIssuer = Configuration["JwtSettings::Issuer"],
                         ValidateAudience = true,
-                        ValidAudience = Configuration["JwtSettings::Issuer"],
+                        ValidAudience = Configuration["JwtSettings::Audience"],
                         RequireExpirationTime = true,
                         ValidateLifetime = true,
                         ClockSkew = TimeSpan.Zero // remove delay of token when expire
@@ -93,19 +94,20 @@ namespace WaterPoloStat.API
             }));
 
             // Auto Mapper Configurations
-            //var mappingConfig = new MapperConfiguration(mc =>
-            //{
-            //    mc.AddCollectionMappers();
-            //    mc.AddProfile(new Mappings.Mappings());
-            //});
-            //var mapper = mappingConfig.CreateMapper();
-            //services.AddSingleton(mappingConfig);
-            //services.AddSingleton(mapper);
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                //mc.AddCollectionMappers();
+                mc.AddProfile(new Mappings.Mappings());
+            });
+            var mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mappingConfig);
+            services.AddSingleton(mapper);
 
             // Services
             services.AddScoped<DbContext, WaterPoloStatDomain>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IService<>), typeof(BaseService<>));
+            services.AddScoped<IPartitaService, PartitaService>();
 
         }
 
@@ -123,11 +125,12 @@ namespace WaterPoloStat.API
                 app.UseHsts();
             }
 
-            app.UseRouting();
+            
             app.UseHttpsRedirection();
+            
             app.UseAuthentication();
+            app.UseRouting();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
