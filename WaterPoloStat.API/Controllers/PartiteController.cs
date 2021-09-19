@@ -111,7 +111,7 @@ namespace WaterPoloStat.API.Controllers
 
         // PUT: api/Partite/5
         [HttpPut("{id}")]
-        public async Task PutAsync(int id, [FromBody] NewEditPartitaDto model, CancellationToken cancellationToken = default)
+        public async Task<ActionResult> PutAsync(int id, [FromBody] NewEditPartitaDto model, CancellationToken cancellationToken = default)
         {
 
             if (!model.SquadraCasa.SquadraId.HasValue)
@@ -167,11 +167,11 @@ namespace WaterPoloStat.API.Controllers
                     SquadraId = model.SquadraCasa.SquadraId.Value
                 });
             }
-            var id = await _partitaService.NuovaPartitaAsync(model.Luogo, model.Campionato, model.Citta, model.Data,
+             await _partitaService.ModificaPartitaAsync(id,model.Luogo, model.Campionato, model.Citta, model.Data,
                 model.SquadraCasa.SquadraId.Value, model.SquadraOspiti.SquadraId.Value,
                 rosterCasa, rosterOspiti, cancellationToken);
             model.Id = id;
-            return CreatedAtRoute("GetPartitaById", new { id = id }, model);
+            return Ok();
         }
 
         // DELETE: api/ApiWithActions/5

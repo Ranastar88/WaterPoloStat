@@ -28,6 +28,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { ModificaRosterComponent } from './shared/components/modifica-roster/modifica-roster.component';
 import { ElencoPartiteComponent } from './elenco-partite/elenco-partite.component';
 import {MatListModule} from '@angular/material/list';
+import { ModificaStatComponent } from './modifica-stat/modifica-stat.component';
+import { CronometroComponent } from './shared/components/cronometro/cronometro.component';
+import { AddGoalComponent } from './shared/components/add-goal/add-goal.component';
+import {MatDialogModule} from '@angular/material/dialog'; 
 
 @NgModule({
   declarations: [
@@ -37,7 +41,8 @@ import {MatListModule} from '@angular/material/list';
     RegistrazioneComponent,
     ModificaPartitaComponent,
     ModificaRosterComponent,
-    ElencoPartiteComponent
+    ElencoPartiteComponent,    
+    ModificaStatComponent, CronometroComponent, AddGoalComponent
   ],
   imports: [
     HttpClientModule,
@@ -59,7 +64,8 @@ import {MatListModule} from '@angular/material/list';
     MatNativeDateModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ],
   providers: [
     MatDatepickerModule,

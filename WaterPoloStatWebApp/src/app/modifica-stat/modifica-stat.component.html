@@ -1,0 +1,31 @@
+<div class="container mt-2">
+    <h2>Cronometro</h2>
+    <app-cronometro></app-cronometro>
+    <div fxLayout="row" fxLayoutAlign="space-between start" class="mb-2">
+        <div class="col-4">
+            <h2>Nuovo Evento</h2>
+            <div fxLayout="row" fxLayoutAlign="space-between start" class="mb-4">
+                <button mat-flat-button color="primary" class="col-6" (click)="aggiungiGoal()">Aggiungi Goal</button>
+                <button mat-flat-button color="primary" class="col-6">Aggiungi Tiro</button>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between start" class="mb-4">
+                <button class="col-6" mat-flat-button color="primary">Espulsione</button>
+                <button class="col-6" mat-flat-button color="primary">Timeout</button>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between start" class="mb-4">
+                <button class="col-6" mat-flat-button color="primary">Palla Rubata</button>
+                <button class="col-6" mat-flat-button color="primary">Palla Persa</button>
+            </div>
+            <button class="w-100" mat-flat-button color="warn">Termina Partita</button>
+        </div>
+        <div class="col-8">
+            <h2>Statistiche</h2>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-flat-button color="primary">Squadra di Casa</button>
+                <button mat-flat-button color="primary">Eventi</button>
+                <button mat-flat-button color="primary">Squadra Ospiti</button>
+            </div>
+        </div>
+    </div>
+
+</div>
